@@ -59,7 +59,7 @@ The website presents the installation's educational intentions, curriculum conne
 
 It is designed for viewing on desktop, tablet, and mobile devices.
 
-*Website link: add your published GitHub Pages URL here.*
+*Website link: [A Field of Remembrance](https://studio24share1-commits.github.io/Field_of_Remembrance_Website/).*
 
 ---
 
