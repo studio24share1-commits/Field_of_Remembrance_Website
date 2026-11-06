@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Field of Remembrance</title>
+<meta name="description" content="A Field of Remembrance: a school-wide Remembrance Day art installation of 1,000 red poppies by Enquiring Minds Montessori and Toronto Children’s School of the Arts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --poppy: #c8102e;
+    --poppy-deep: #8f0a20;
+    --ink: #1f1f1f;
+    --muted: #5a5753;
+    --paper: #ffffff;
+    --mist: #f2f0ee;
+    --rule: #d8d4d0;
+    --serif: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+    --sans: "Work Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible { outline: 3px solid var(--poppy); outline-offset: 3px; }
+
+  /* ---------- Hero / video ---------- */
+  .hero {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    min-height: 480px;
+    background:
+      radial-gradient(ellipse at 50% 120%, #5b0714 0%, #000 65%);
+    color: #fff;
+    overflow: hidden;
+  }
+  .hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.35) 38%, rgba(0,0,0,0) 62%);
+    pointer-events: none;
+  }
+  .hero-text {
+    position: absolute;
+    z-index: 2;
+    left: 0; right: 0; bottom: 0;
+    padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(2rem, 6vh, 4rem);
+    max-width: 70rem;
+  }
+  .hero h1 {
+    margin: 0;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 7.5vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+  .hero .lest {
+    margin: .9rem 0 0;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  }
+  .hero .byline {
+    margin: 1.4rem 0 0;
+    font-family: var(--sans);
+    font-size: .95rem;
+    line-height: 1.5;
+    max-width: 38rem;
+    color: rgba(255,255,255,.88);
+  }
+  .sound {
+    position: absolute;
+    z-index: 3;
+    right: clamp(1rem, 3vw, 2rem);
+    bottom: clamp(1.5rem, 5vh, 3rem);
+    font-family: var(--sans);
+    font-size: .85rem;
+    font-weight: 500;
+    color: #fff;
+    background: rgba(0,0,0,.55);
+    border: 1px solid rgba(255,255,255,.6);
+    border-radius: 999px;
+    padding: .55rem 1.1rem;
+    cursor: pointer;
+  }
+  .sound:hover { background: rgba(0,0,0,.8); }
+  .sound[hidden] { display: none; }
+
+  /* ---------- Page body ---------- */
+  main { padding-bottom: 2rem; }
+  .wrap {
+    width: min(100% - 2.5rem, 44rem);
+    margin-inline: auto;
+  }
+  .wide {
+    width: min(100% - 2.5rem, 64rem);
+    margin-inline: auto;
+  }
+
+  section { padding-top: clamp(3.5rem, 8vw, 6rem); }
+
+  h2 {
+    margin: 0 0 1.25rem;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  h2 .sub {
+    display: block;
+    margin-top: .25rem;
+    font-weight: 400;
+    font-style: italic;
+    font-size: .62em;
+    color: var(--poppy-deep);
+  }
+  h3 {
+    margin: 0 0 .35rem;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    font-weight: 700;
+  }
+  p { margin: 0 0 1.15rem; }
+  ul { margin: 0 0 1.2rem; padding-left: 1.3rem; }
+  li { margin-bottom: .6rem; }
+  li::marker { color: var(--poppy); }
+
+  .lede {
+    font-size: 1.25rem;
+    line-height: 1.65;
+  }
+
+  .poppy-rule {
+    display: block;
+    width: 3.5rem;
+    height: 4px;
+    background: var(--poppy);
+    border: 0;
+    margin: 0 0 1.75rem;
+  }
+
+  /* ---------- Educational intentions ---------- */
+  .intentions { margin: 0; }
+  .intention {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    gap: .5rem 2.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .intention:last-child { border-bottom: 1px solid var(--rule); }
+  .intention h3 { font-size: 1.15rem; }
+  .intention .area {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: .88rem;
+    color: var(--poppy-deep);
+    margin-bottom: .2rem;
+  }
+  .intention p { margin: 0; }
+
+  /* ---------- Tables ---------- */
+  .table-scroll {
+    overflow-x: auto;
+    margin: 1.5rem 0 0;
+    border-top: 3px solid var(--poppy);
+  }
+  table {
+    width: 100%;
+    min-width: 40rem;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: .95rem;
+    line-height: 1.55;
+  }
+  caption {
+    text-align: left;
+    padding: .9rem 0 .6rem;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: .85rem 1rem .85rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  thead th {
+    font-weight: 600;
+    background: var(--mist);
+    padding-left: .75rem;
+  }
+  tbody th { font-weight: 600; white-space: nowrap; }
+  tbody td:first-of-type, tbody th + td { padding-left: 0; }
+  td, th { padding-right: 1.25rem; }
+  .map-table th:first-child, .map-table td:first-child { padding-left: .75rem; }
+  .assess-table th:first-child, .assess-table td:first-child { padding-left: .75rem; }
+
+  /* ---------- The thousand ---------- */
+  .math-band {
+    margin-top: clamp(3.5rem, 8vw, 6rem);
+    background: var(--poppy);
+    color: #fff;
+    padding: clamp(3rem, 7vw, 5rem) 0;
+  }
+  .math-band h2 { color: #fff; }
+  .math-band h2 .sub { color: #ffd9de; }
+  .math-band .poppy-rule { background: #fff; }
+  .math-band p { max-width: 44rem; }
+
+  .decimal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+    align-items: flex-end;
+    margin: 2rem 0 2.25rem;
+    padding: 0;
+    list-style: none;
+  }
+  .decimal li { margin: 0; }
+  .decimal .n {
+    display: block;
+    font-size: clamp(3rem, 9vw, 5.5rem);
+    line-height: 1;
+    font-weight: 700;
+  }
+  .decimal .l {
+    display: block;
+    margin-top: .4rem;
+    font-family: var(--sans);
+    font-size: .9rem;
+    max-width: 12rem;
+    line-height: 1.4;
+  }
+  .decimal .arrow {
+    font-size: 2rem;
+    line-height: 1;
+    padding-bottom: 2rem;
+    opacity: .8;
+  }
+
+  .field-demo { margin-top: 2.5rem; }
+  .field-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-bottom: 1rem;
+    font-family: var(--sans);
+  }
+  .field-controls button {
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 500;
+    color: #fff;
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,.75);
+    border-radius: 999px;
+    padding: .5rem 1.1rem;
+    cursor: pointer;
+  }
+  .field-controls button[aria-pressed="true"] {
+    background: #fff;
+    color: var(--poppy-deep);
+    border-color: #fff;
+  }
+  .field-controls button:focus-visible { outline-color: #fff; }
+
+  .grid-frame {
+    background: #fff;
+    padding: clamp(.75rem, 2vw, 1.5rem);
+  }
+  .poppy-grid {
+    display: grid;
+    gap: 0;
+    width: 100%;
+  }
+  .poppy-grid i {
+    display: block;
+    aspect-ratio: 1;
+    position: relative;
+  }
+  .poppy-grid i::before {
+    content: "";
+    position: absolute;
+    inset: 14%;
+    border-radius: 50%;
+    background: var(--poppy);
+  }
+  .field-caption {
+    margin: 1rem 0 0;
+    font-family: var(--sans);
+    font-size: .95rem;
+    min-height: 1.6em;
+  }
+  .field-note {
+    font-size: .95rem;
+    max-width: 44rem;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    color: #ffe6e9;
+  }
+
+  /* ---------- Practical life steps ---------- */
+  .steps { list-style: none; margin: 1.5rem 0; padding: 0; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 1.25rem 3.25rem;
+    margin: 0;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0; top: .1rem;
+    width: 2.1rem; height: 2.1rem;
+    border-radius: 50%;
+    background: var(--poppy);
+    color: #fff;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: .95rem;
+    display: grid;
+    place-items: center;
+  }
+  .steps li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 1.05rem; top: 2.4rem; bottom: .2rem;
+    width: 2px;
+    background: var(--rule);
+  }
+  .steps strong { font-weight: 700; }
+
+  /* ---------- Callouts ---------- */
+  .callout {
+    margin: 2rem 0 0;
+    padding: 1.25rem 1.5rem;
+    background: var(--mist);
+    border-left: 4px solid var(--poppy);
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .peace {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.6;
+    padding-left: 1.5rem;
+    border-left: 4px solid var(--poppy);
+  }
+
+  /* ---------- Closing ---------- */
+  .closing {
+    margin-top: clamp(4rem, 9vw, 7rem);
+    background: #000;
+    color: #fff;
+    padding: clamp(3.5rem, 8vw, 6rem) 0;
+  }
+  .closing h2 { color: #fff; }
+  .closing .poppy-rule { background: var(--poppy); }
+  .closing .sign {
+    margin: 3rem 0 0;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-style: italic;
+    line-height: 1.2;
+  }
+  .closing .sign small {
+    display: block;
+    margin-top: 1rem;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: .9rem;
+    color: rgba(255,255,255,.75);
+    line-height: 1.5;
+  }
+
+  /* ---------- Small screens ---------- */
+  @media (max-width: 40rem) {
+    body { font-size: 1rem; }
+    .intention { grid-template-columns: 1fr; padding: 1.25rem 0; }
+    .decimal .arrow { display: none; }
+    .hero .byline { font-size: .88rem; }
+    .sound { bottom: auto; top: 1rem; right: 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+
+
+<!-- Google Analytics - Private Visitor Tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6HC5XQP8T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q6HC5XQP8T');
+</script>
+
+
+<body>
+
+<header class="hero" id="top">
+  <!--
+    YOUR VIDEO GOES HERE.
+    Put your video file in the same folder as this page and name it
+    field-of-remembrance.mp4  (or change the file name below).
+    Autoplay only works in browsers when the video is muted, so it
+    starts silent and visitors can tap "Sound on" if the video has audio.
+  -->
+  <video id="installation" autoplay muted loop playsinline preload="auto"
+         aria-label="Video of the Field of Remembrance art installation: 1,000 red poppies on the school lawn">
+    <source src="field-of-remembrance.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-text">
+    <h1>A Field of Remembrance</h1>
+    <p class="lest">Lest we forget</p>
+    <p class="byline">
+      A community united in remembrance.<br>
+      Enquiring Minds Montessori &amp; Toronto Children’s School of the Arts
+    </p>
+  </div>
+
+  <button class="sound" id="soundBtn" type="button" aria-pressed="false" hidden>Sound on</button>
+</header>
+
+<main>
+
+  <!-- ================= Curriculum overview ================= -->
+  <section id="overview">
+    <div class="wrap">
+      <hr class="poppy-rule">
+      <h2>Curriculum overview
+        <span class="sub">Remembrance Day art installation, Toddler to Grade 8</span>
+      </h2>
+      <p class="lede">A Field of Remembrance is a collaborative, school-wide art installation designed to transform the front lawn into a symbolic field of 1,000 red poppies. Inspired by the imagery of <em>In Flanders Fields</em> and the orderly rows of military graves, the installation brings together mathematics, visual arts, geometry, measurement, practical life, Canadian history, and Montessori peace education.</p>
+      <p>Each student contributes to the installation by preparing ten templated poppies using red metallic paper. The reflective surface captures natural sunlight, creating a vibrant field of red that changes in appearance throughout the day. Each poppy is mounted on an 18-inch dowel painted black, secured with a two-inch piece of black duct tape, and finished by painting the white reverse side of the metallic paper.</p>
+      <p>The installation is designed not only as an artistic tribute but also as a concrete mathematical experience. For CASA and Primary Years students, the opportunity to see, count, organize, and physically construct a collection of 1,000 objects provides a powerful representation of quantity and the decimal system.</p>
+      <p>Students in Grades 1–3 assume responsibility for constructing a grid across the front lawn using caution tape. The repeated printed word <em>CAUTION</em> becomes a visual measuring unit, allowing children to identify consistent intervals and position their poppies independently. Through this process, students discover how equal spacing, alignment, repetition, and geometric organization transform individual objects into a unified installation.</p>
+      <p>The completed field serves as a visual expression of remembrance, demonstrating how individual contributions become part of a collective tribute to those who served and sacrificed.</p>
+    </div>
+  </section>
+
+  <!-- ================= Educational intentions ================= -->
+  <section id="intentions">
+    <div class="wrap">
+      <hr class="poppy-rule">
+      <h2>Educational intentions</h2>
+      <div class="intentions">
+        <article class="intention">
+          <div>
+            <span class="area">Mathematics</span>
+            <h3>Making 1,000 visible</h3>
+          </div>
+          <p>Children experience quantity through concrete materials, counting in tens, grouping, place value, repeated patterns, estimation, and the physical representation of 1,000.</p>
+        </article>
+        <article class="intention">
+          <div>
+            <span class="area">Geometry and measurement</span>
+            <h3>Creating order</h3>
+          </div>
+          <p>Students explore straight lines, parallel rows, perpendicular intersections, equal intervals, grids, spatial relationships, and the use of a repeated visual unit for measurement.</p>
+        </article>
+        <article class="intention">
+          <div>
+            <span class="area">Visual arts</span>
+            <h3>Repetition, colour and light</h3>
+          </div>
+          <p>The installation investigates shape, colour, reflective surfaces, contrast, rhythm, repetition, and the visual impact of arranging many identical forms into one large composition.</p>
+        </article>
+        <article class="intention">
+          <div>
+            <span class="area">Montessori practical life</span>
+            <h3>Purposeful work</h3>
+          </div>
+          <p>Cutting, painting, attaching, carrying, positioning, and caring for materials develop coordination, independence, concentration, sequencing, and responsibility.</p>
+        </article>
+        <article class="intention">
+          <div>
+            <span class="area">History and peace education</span>
+            <h3>Collective remembrance</h3>
+          </div>
+          <p>The poppy symbolizes remembrance, while the ordered field introduces the historical imagery of Flanders and encourages age-appropriate reflection on sacrifice, gratitude, and peace.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Curriculum mapping ================= -->
+  <section id="mapping">
+    <div class="wide">
+      <hr class="poppy-rule">
+      <h2>Curriculum mapping by developmental level</h2>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Curriculum mapping table, scrolls sideways on small screens">
+        <table class="map-table">
+          <thead>
+            <tr><th scope="col">Level</th><th scope="col">Curriculum focus</th><th scope="col">Learning experience</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Toddler</th><td>Sensorial exploration, purposeful movement, coordination</td><td>Explore red colour, paper texture, painting, and participation in a collective activity. Adults prepare cutting and assembly steps as needed.</td></tr>
+            <tr><th scope="row">PreCASA</th><td>Refinement of movement, order, sequencing, one-to-one correspondence</td><td>Participate in painting and assembling poppies, counting small groups, and placing completed work with adult guidance.</td></tr>
+            <tr><th scope="row">CASA 1</th><td>Numeration, visual discrimination, order, practical life</td><td>Count and organize poppies into small sets, recognize repeated forms, and participate in placement along prepared lines.</td></tr>
+            <tr><th scope="row">CASA 2</th><td>Decimal system, grouping in tens, spatial organization</td><td>Organize poppies into groups of ten, explore repeated intervals, and observe how groups combine into larger quantities.</td></tr>
+            <tr><th scope="row">CASA 3</th><td>Concrete representation of 1,000, decimal hierarchy, geometry</td><td>Connect ten groups of ten to 100 and ten hundreds to 1,000; investigate the relationship between individual poppies and the completed field.</td></tr>
+            <tr><th scope="row">Grade 1</th><td>Counting, skip-counting, measurement, patterning</td><td>Count poppies in groups of ten, use repeated spacing markers, and identify straight lines and equal intervals.</td></tr>
+            <tr><th scope="row">Grade 2</th><td>Place value, repeated addition, arrays, measurement</td><td>Explore rows and columns, repeated groups, counting strategies, and the mathematical organization of the field.</td></tr>
+            <tr><th scope="row">Grade 3</th><td>Multiplication, division, arrays, geometry, problem-solving</td><td>Plan the grid, investigate possible row-and-column arrangements, and use repeated units to create consistent spacing.</td></tr>
+            <tr><th scope="row">Grades 4–6</th><td>Scale, proportional reasoning, visual composition, historical inquiry</td><td>Examine how repetition and scale create visual impact; connect the installation to remembrance, history, and public art.</td></tr>
+            <tr><th scope="row">Grades 7–8</th><td>Symbolism, installation art, civic responsibility, historical interpretation</td><td>Interpret the relationship between individual and collective remembrance, the symbolism of the poppy, and the emotional effect of the installation.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Mathematics ================= -->
+  <div class="math-band" id="mathematics">
+    <div class="wide">
+      <hr class="poppy-rule">
+      <h2>Mathematics
+        <span class="sub">The concrete representation of 1,000</span>
+      </h2>
+      <p>The central mathematical intention of A Field of Remembrance is to provide children with an opportunity to experience the magnitude of 1,000 through a tangible, three-dimensional representation.</p>
+
+      <ul class="decimal" aria-label="The decimal relationship: 10, 100, 1,000">
+        <li><span class="n">10</span><span class="l">Poppies in one group</span></li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li><span class="n">100</span><span class="l">Poppies in ten groups</span></li>
+        <li class="arrow" aria-hidden="true">→</li>
+        <li><span class="n">1,000</span><span class="l">Poppies in the field</span></li>
+      </ul>
+
+      <p>For CASA students, this experience supports Montessori sensorial mathematics by allowing them to observe the relationship between units, tens, hundreds, and one thousand. The field gives physical scale to a quantity that can otherwise remain abstract.</p>
+      <p>For Grades 1–3, the installation extends into skip-counting, repeated addition, multiplication, arrays, and the organization of quantities into rows and columns.</p>
+      <p>For example, a field of 1,000 poppies could be organized mathematically as:</p>
+
+      <div class="field-demo">
+        <div class="field-controls" role="group" aria-label="Choose a field arrangement">
+          <button type="button" data-cols="100" data-rows="10" aria-pressed="false">10 rows of 100</button>
+          <button type="button" data-cols="50" data-rows="20" aria-pressed="false">20 rows of 50</button>
+          <button type="button" data-cols="40" data-rows="25" aria-pressed="true">25 rows of 40</button>
+        </div>
+        <div class="grid-frame">
+          <div class="poppy-grid" id="poppyGrid" role="img" aria-label="A grid of 1,000 red poppies"></div>
+        </div>
+        <p class="field-caption" id="fieldCaption" aria-live="polite"></p>
+        <p class="field-note">The actual arrangement would depend on the available lawn dimensions and safe spacing requirements.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Geometry ================= -->
+  <section id="geometry">
+    <div class="wrap">
+      <hr class="poppy-rule">
+      <h2>Geometry and measurement
+        <span class="sub">The caution tape grid</span>
+      </h2>
+      <p>The Primary Years students’ responsibility for constructing the caution tape grid introduces an authentic mathematical problem: how can we position hundreds of poppies so that every row is straight and the distance between each poppy is consistent?</p>
+      <p>Rather than relying on adults to measure and mark every position, students use the repeated printed word <em>CAUTION</em> as a visual reference for spacing.</p>
+      <p>This approach supports:</p>
+      <ul>
+        <li>Non-standard units of measurement and repeated intervals.</li>
+        <li>Recognition of parallel and perpendicular lines.</li>
+        <li>Understanding rows, columns, and arrays.</li>
+        <li>Visual estimation, alignment, and correction of error.</li>
+        <li>Independence through a prepared environment that allows children to position their own work.</li>
+      </ul>
+      <div class="callout">
+        <p>For mathematical accuracy, students should use a consistent reference point on each printed word, such as the beginning of the letter C. The actual printed repeat distance should be checked before laying the grid, since caution tape does not necessarily provide standardized measurement intervals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Visual arts ================= -->
+  <section id="arts">
+    <div class="wrap">
+      <hr class="poppy-rule">
+      <h2>Visual arts
+        <span class="sub">Material, light and composition</span>
+      </h2>
+      <p>The choice of red metallic paper is integral to the artistic intention of the installation.</p>
+      <p>Unlike ordinary construction paper, the reflective surface interacts with natural sunlight, creating changing highlights and intensifying the visual presence of the red poppies across the lawn.</p>
+      <p>Students investigate the relationship between material and light, while the contrast between the red petals and black stems creates a strong, unified visual language.</p>
+      <p>The repetition of a single templated form allows students to explore how individual shapes become part of a much larger composition. The visual rhythm of the carefully aligned rows creates a sense of order, while the sheer quantity of poppies communicates the scale of collective remembrance.</p>
+      <p>The finished installation is both an artwork and an environment through which students can observe how repetition, spacing, colour, and light contribute to meaning.</p>
+    </div>
+  </section>
+
+  <!-- ================= Practical life ================= -->
+  <section id="practical-life">
+    <div class="wrap">
+      <hr class="poppy-rule">
+      <h2>Practical life
+        <span class="sub">Preparing the poppies</span>
+      </h2>
+      <p>The production process incorporates a purposeful sequence of work:</p>
+      <ol class="steps">
+        <li><strong>Cutting.</strong> Students cut ten poppy shapes from red metallic paper using prepared templates, refining hand-eye coordination and scissor control.</li>
+        <li><strong>Painting the stems.</strong> Students paint the 18-inch wooden dowels black, practising controlled movement, brush handling, and care of materials.</li>
+        <li><strong>Attaching.</strong> Students secure the dowel to the reverse of each poppy using a two-inch piece of black duct tape, developing coordination and sequencing.</li>
+        <li><strong>Finishing.</strong> Students paint the white reverse side of the paper, attending to completeness and visual consistency.</li>
+        <li><strong>Installing.</strong> Students carry their completed poppies to the lawn and position them according to the grid, contributing to a shared community task.</li>
+      </ol>
+      <p>This sequence connects the preparation of individual materials to the completion of a meaningful community project.</p>
+      <p>From a Montessori perspective, the work supports independence, concentration, coordination, order, and purposeful movement. The installation provides a visible result of collaborative effort while allowing each child to contribute through developmentally appropriate participation.</p>
+    </div>
+  </section>
+
+  <!-- ================= History and peace ================= -->
+  <section id="history">
+    <div class="wrap">
+      <hr class="poppy-rule">
+      <h2>Canadian history and peace education</h2>
+      <p>The field of red poppies connects students to the history of the First World War and the significance of the poppy as a Canadian symbol of remembrance.</p>
+      <p>Inspired by Lieutenant-Colonel John McCrae’s poem <em>In Flanders Fields</em>, the installation recalls the poppies associated with the battlefields and military cemeteries of Belgium and northern France.</p>
+      <p>The ordered arrangement evokes the rows of military graves, encouraging students to consider the human consequences of war and the importance of remembering those who lost their lives.</p>
+      <p>For younger children, the educational focus remains on kindness, gratitude, peace, and respectful participation. Older students can examine the historical origins of the poppy, the significance of the First World War, and the role of public memorials in preserving collective memory.</p>
+      <p class="peace">The installation should be understood not as a celebration of war, but as an acknowledgement of sacrifice and a commitment to peace.</p>
+    </div>
+  </section>
+
+  <!-- ================= Assessment ================= -->
+  <section id="assessment">
+    <div class="wide">
+      <hr class="poppy-rule">
+      <h2>Assessment and observation</h2>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Assessment table, scrolls sideways on small screens">
+        <table class="assess-table" style="min-width:32rem">
+          <thead>
+            <tr><th scope="col">Area</th><th scope="col">Observable evidence</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Mathematics</th><td>Counting, grouping in tens, skip-counting, place value and arrays.</td></tr>
+            <tr><th scope="row">Geometry</th><td>Straight rows, repeated intervals, grid alignment and correction of error.</td></tr>
+            <tr><th scope="row">Visual arts</th><td>Cutting control, material choice, reflection, repetition and composition.</td></tr>
+            <tr><th scope="row">Practical life</th><td>Sequencing, coordination, independence, care and task completion.</td></tr>
+            <tr><th scope="row">Collaboration</th><td>Shared responsibility, cooperation and respectful installation.</td></tr>
+            <tr><th scope="row">History and peace</th><td>Understanding poppy symbolism and demonstrating respectful remembrance.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Planning ================= -->
+  <section id="planning">
+    <div class="wrap">
+      <hr class="poppy-rule">
+      <h2>Planning consideration</h2>
+      <p>If every student prepares ten poppies, the school will require 100 participating students to reach the target of 1,000. If enrolment differs, additional poppies can be prepared through collaborative classroom work or family contributions.</p>
+      <p>For the installation itself, I recommend grouping the completed poppies into bundles of ten before placing them on the lawn. This would create a particularly valuable Montessori mathematical experience: children could physically observe how ten units make a ten, ten tens make one hundred, and ten hundreds make one thousand.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= Closing ================= -->
+<footer class="closing" id="statement">
+  <div class="wrap">
+    <hr class="poppy-rule">
+    <h2>Final curriculum statement</h2>
+    <p>A Field of Remembrance demonstrates how a school-wide installation can unite mathematical understanding, artistic expression, purposeful work, and historical remembrance.</p>
+    <p>By constructing 1,000 poppies and arranging them in carefully measured rows, students transform an abstract number into a visible, physical experience. Each child contributes to the collective field, discovering that individual effort becomes part of something greater.</p>
+    <p>The completed installation stands as both a concrete representation of 1,000 and a shared expression of gratitude, remembrance, and hope for peace.</p>
+    <p class="sign">Lest we forget.
+      <small>Enquiring Minds Montessori &amp; Toronto Children’s School of the Arts</small>
+    </p>
+  </div>
+</footer>
+
+<script>
+  /* ---------- Video: autoplay, loop, optional sound ---------- */
+  (function () {
+    var video = document.getElementById('installation');
+    var btn = document.getElementById('soundBtn');
+    if (!video) return;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      video.removeAttribute('autoplay');
+      video.pause();
+      video.setAttribute('controls', '');
+    } else {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () { /* autoplay blocked; the poster colour shows instead */ });
+    }
+
+    // Only offer a sound button if the video file actually loads.
+    video.addEventListener('loadeddata', function () {
+      if (!reduceMotion) btn.hidden = false;
+    });
+
+    btn.addEventListener('click', function () {
+      video.muted = !video.muted;
+      btn.textContent = video.muted ? 'Sound on' : 'Sound off';
+      btn.setAttribute('aria-pressed', String(!video.muted));
+      if (video.paused) video.play();
+    });
+  })();
+
+  /* ---------- The thousand poppies ---------- */
+  (function () {
+    var grid = document.getElementById('poppyGrid');
+    var caption = document.getElementById('fieldCaption');
+    var buttons = document.querySelectorAll('.field-controls button');
+    if (!grid) return;
+
+    var TOTAL = 1000;
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < TOTAL; i++) frag.appendChild(document.createElement('i'));
+    grid.appendChild(frag);
+
+    function setArrangement(cols, rows) {
+      grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+      caption.textContent = rows + ' rows × ' + cols + ' poppies = ' + (rows * cols).toLocaleString('en-CA') + ' poppies';
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        buttons.forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        setArrangement(+b.dataset.cols, +b.dataset.rows);
+      });
+    });
+
+    setArrangement(40, 25);
+  })();
+</script>
+</body>
+</html>
