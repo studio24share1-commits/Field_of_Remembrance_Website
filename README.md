@@ -63,30 +63,6 @@ It is designed for viewing on desktop, tablet, and mobile devices.
 
 ---
 
-## 💻 Website Information
-
-This website is built using **HTML5, CSS3, and JavaScript** and can be hosted through **GitHub Pages**.
-
-Features include:
-
-- Responsive layout for different screen sizes.
-- Full-screen installation video with optional sound.
-- Interactive 1,000-poppy grid with three arrangements.
-- Curriculum mapping from Toddler through Grade 8.
-- Educational explanations covering mathematics, art, history, and Montessori practical life.
-
-### Project Files
-
-- `A Field of Remembrance.html` — Main website page.
-- `field-of-remembrance.mp4` — Installation video (place alongside the HTML file).
-- `README.md` — Project overview and information.
-
-For GitHub Pages, rename the main HTML file to `index.html` if you want it to open automatically at the repository's website URL.
-
-**Private visitor analytics:** Google Analytics may be added later. It is not included in the original HTML file.
-
----
-
 ## © Copyright & Usage
 
 © 2026 **Enquiring Minds Montessori & Toronto Children's School of the Arts**. All rights reserved.
